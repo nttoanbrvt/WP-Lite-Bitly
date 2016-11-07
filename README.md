@@ -9,5 +9,9 @@ Enter your Bitly access token at ```Appearance->Customize->WP Lite Bitly``` sect
 
 ## Changelogs
 
+07 Nov 2016 V1.1
+
+Fixed: Removed auto generating draft post shortlink.
+
 05 Nov 2016 V1.0
 First release.

@@ -3,7 +3,7 @@
 Plugin Name:    WP Lite Bitly
 Plugin URI:     http://phpface.net
 Description:    Another Wordpress plugin for converting WP permalink to bitly shortlink
-Version:        1.0
+Version:        1.1
 Author:         Toan Nguyen
 Author URI:     http://phpface.net
 Text Domain:	wp-lite-bitly
@@ -69,7 +69,7 @@ if( ! class_exists( 'WP_Lite_Bitly' ) ){
 			$response   =   json_decode( wp_remote_retrieve_body( $response ), true );
 			 
 			return isset( $response['data']['url'] ) ? $response['data']['url'] : $longUrl;
-		}
+		}	
 		 
 		/**
 		 * Fires once a post has been saved.
@@ -80,6 +80,12 @@ if( ! class_exists( 'WP_Lite_Bitly' ) ){
 		 */
 		 
 		function wp_insert_post( $post_ID, $post, $update ) {
+			
+			$post_status	=	get_post_status( $post_ID );
+			
+			if( ! in_array( $post_status , array( 'publish', 'private' )) ){
+				return;
+			}
 
 			$shortUrl   =   $this->shorten( get_permalink( $post_ID ) );
 
